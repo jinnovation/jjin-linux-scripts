@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# ==== ranwall by Jonathan Jin (JinAndTonic) ====
+# meant to run as background process
+# uses feh to automatically change desktop wallpaper at a given time interval
+# outputs any given errors by feh to notification center
+
+PROGNAME=$(basename $0)
+
+if [ $# -eq 0 ]
+then
+    echo "usage: ${PROGNAME} <time interval (m)>"
+    exit 1
+fi
+
+while true; do
+    # TODO: shorten the goddamn find operation    
+    IMG=$(find /home/jjin/Dropbox/Images/Wallpapers/ -type f \( -name '*.jpg' -o -name '*.png' \) -print | egrep -v "/Girls/" | shuf -n1)
+    notify-send $(feh --bg-fill "${IMG}")
+    sleep $1m
+done
