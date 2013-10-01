@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# ==== ucvpn by Jonathan Jin ====
+# uses openconnect to connect to the University of Chicago VPN network
+# sends success/failure notification to notification center
+
+echo -n "Username: "
+read UNAME
+echo -n "Password: "
+read -s PW
+
+# read -p "Username: " username
+# read -sp "Password: " password
