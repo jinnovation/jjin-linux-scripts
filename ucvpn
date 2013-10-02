@@ -7,8 +7,10 @@ read UNAME
 echo -n "Password: "
 read -s PW
 
-# TODO: *REALLY* bad sudo practice; work it out
-echo -n $PW | sudo openconnect --authgroup=CNetID --user=$UNAME cvpn.uchicago.edu
-
+# TODO: alternate, cleaner way. investigate
 # read -p "Username: " username
 # read -sp "Password: " password
+
+
+# TODO: *REALLY* bad sudo practice; work it out
+echo -n $PW | sudo openconnect --authgroup=CNetID --user=$UNAME cvpn.uchicago.edu
