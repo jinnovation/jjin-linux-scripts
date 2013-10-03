@@ -2,15 +2,9 @@
 
 # TODO: add usage prompt
 
-echo -n "Username: "
-read UNAME
-echo -n "Password: "
-read -s PW
-
-# TODO: alternate, cleaner way. investigate
-# read -p "Username: " username
-# read -sp "Password: " password
-
+read -p "Username: " UNAME
+read -p "Password: " -s PW
+# TODO: print newline after accepting pw
 
 # TODO: *REALLY* bad sudo practice; work it out
 echo -n $PW | sudo openconnect --authgroup=CNetID --user=$UNAME cvpn.uchicago.edu
