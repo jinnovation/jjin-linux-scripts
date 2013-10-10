@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# TODO: account for multiple video outputs, handle them individually to give
+# them each a unique (theoretically) wallpaper
+
 # TODO: shorten the goddamn find operation    
 IMG=$(find /home/jjin/Dropbox/Images/Wallpapers/ -type f \( -name '*.jpg' -o -name '*.png' \) -print | egrep -v "/Girls/" | shuf -n1)
 notify-send $(feh --bg-fill "${IMG}")
