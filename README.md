@@ -1,7 +1,12 @@
 # Table of Contents #
+
 ## ranwall ##
+* Uses `feh` to change desktop wallpaper to a randomly chosen image
+  
+## ranwall_timer ##
 * Meant to be run as a daemon
-* Uses `feh` to automatically change desktop wallpaper at a given time interval (minutes)
+* Uses the aforementioned ranwall script to automatically change desktop
+  wallpaper at a given interval (minutes)
 * Outputs any given errors to notification center
 
 ## ucvpn ##
