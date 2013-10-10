@@ -5,7 +5,7 @@
   
 ## ranwall_timer ##
 * Meant to be run as a daemon
-* Uses the aforementioned ranwall script to automatically change desktop
+* Uses the aforementioned `ranwall` script to automatically change desktop
   wallpaper at a given interval (minutes)
 * Outputs any given errors to notification center
 
