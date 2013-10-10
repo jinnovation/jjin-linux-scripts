@@ -3,7 +3,7 @@
 ## ranwall ##
 * Uses `feh` to change desktop wallpaper to a randomly chosen image
   
-## ranwall_timer ##
+## ranwall_time ##
 * Meant to be run as a daemon
 * Uses the aforementioned `ranwall` script to automatically change desktop
   wallpaper at a given interval (minutes)
