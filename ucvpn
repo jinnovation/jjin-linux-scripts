@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# TODO: add usage prompt
-
 read -p "Username: " UNAME
 read -p "Password: " -s PW
 # TODO: print newline after accepting pw
