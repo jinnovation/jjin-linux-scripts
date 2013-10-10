@@ -9,6 +9,6 @@ then
 fi
 
 while true; do
-
+    /home/jjin/bin/ranwall
     sleep $1m
 done
