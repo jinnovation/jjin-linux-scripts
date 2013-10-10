@@ -1,11 +1,15 @@
 #!/bin/sh
 
-# TODO: account for multiple video outputs, handle them individually to give
-# them each a unique (theoretically) wallpaper
-
 DIR=/home/jjin/Dropbox/Images/Wallpapers/
-EXCLUDE="/Girls/"
+EXCLUDE="/Girls/" # sue me
+
+# TODO: account for multiple video outputs, handle them individually to give
+# them each a unique wallpaper
+
+# * check number of monitors, assign to var
+NUMWALL=1
+# * 
 
 # TODO: shorten the goddamn find operation    
-IMG=$(find $DIR -type f \( -name '*.jpg' -o -name '*.png' \) -print | egrep -v $EXCLUDE | shuf -n1)
+IMG=$(find $DIR -type f \( -name '*.jpg' -o -name '*.png' \) -print | egrep -v $EXCLUDE | shuf -n $NUMWALL)
 notify-send $(feh --bg-fill "${IMG}")
