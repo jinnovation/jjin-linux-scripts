@@ -1,14 +1,5 @@
 #!/bin/sh
 
-# PROGNAME=$(basename $0)
-
-# if [ $# -eq 0 ]
-# then
-#     echo "usage: ${PROGNAME} <time interval (m)>"
-#     exit 1
-# fi
-
-
 # TODO: shorten the goddamn find operation    
 IMG=$(find /home/jjin/Dropbox/Images/Wallpapers/ -type f \( -name '*.jpg' -o -name '*.png' \) -print | egrep -v "/Girls/" | shuf -n1)
 notify-send $(feh --bg-fill "${IMG}")
