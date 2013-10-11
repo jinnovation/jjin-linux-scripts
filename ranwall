@@ -6,7 +6,9 @@
 DIR=/home/jjin/Dropbox/Images/Wallpapers/
 EXCLUDE="/Girls/" # sue me
 
-NUMWALL=1 # TODO: check number of monitors, assign to var
+NUMWALL=$(xrandr -q | grep connected | grep -v disconnected | wc -l)
 
-IMG=$(find $DIR -type f \( -name '*.jpg'  -o -name '*.jpeg' -o -name '*.png' \) -print | egrep -v $EXCLUDE | shuf -n $NUMWALL)
-notify-send $(feh --bg-fill "${IMG}")
+IMG=$(find $DIR -type f \( -name '*.jpg'  -o -name '*.jpeg' -o -name '*.png' \) -print | egrep -v $EXCLUDE | shuf -n $NUMWALL | tr "\\n" " ")
+
+# TODO: interpreting mult filenames as one filename; fix
+notify-send $(feh --bg-fill --no-fehbg "${IMG}")
