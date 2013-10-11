@@ -1,14 +1,11 @@
 #!/bin/sh
 
-# TODO: account for multiple video outputs, handle them individually to give
-# them each a unique wallpaper
-
 DIR=/home/jjin/Dropbox/Images/Wallpapers/
 EXCLUDE="/Girls/" # sue me
 
 NUMWALL=$(xrandr -q | grep connected | grep -v disconnected | wc -l)
 
-IMG=$(find $DIR -type f \( -name '*.jpg'  -o -name '*.jpeg' -o -name '*.png' \) -print | egrep -v $EXCLUDE | shuf -n $NUMWALL | tr "\\n" " ")
+IMGS=$(find $DIR -type f \( -name '*.jpg'  -o -name '*.jpeg' -o -name '*.png' \) -print | egrep -v $EXCLUDE | shuf -n $NUMWALL | tr "\\n" " ")
 
-# TODO: interpreting mult filenames as one filename; fix
-notify-send $(feh --bg-fill --no-fehbg "${IMG}")
+# FIXME: filenames w/ spaces in them do not work
+notify-send $(feh --bg-fill --no-fehbg ${IMGS})
