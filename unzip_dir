@@ -4,4 +4,4 @@
 
 FILE=$1
 
-unzip -d "${FILE%.*}" ${FILE}
+unzip -d "${FILE%.*}" "${FILE}"
