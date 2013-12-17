@@ -13,3 +13,7 @@
 * Uses `openconnect` to connect to the University of Chicago VPN network with
   the given username and password
 * Sends success/failure messages to notification center
+
+## unzip_dir ##
+* `unzip` to directory of same name as archive
+* Really just a convenience script; no unique/complicated logic
