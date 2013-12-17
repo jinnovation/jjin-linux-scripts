@@ -1,6 +1,7 @@
 #!/bin/sh
 
 PROGNAME=$(basename $0)
+CMD=/home/jjin/bin/ranwall
 
 if [ $# -eq 0 ]
 then
@@ -9,6 +10,6 @@ then
 fi
 
 while true; do
-    /home/jjin/bin/ranwall
+    $CMD
     sleep $1m
 done
