@@ -17,3 +17,29 @@
 ## unzip_dir ##
 * `unzip` to directory of same name as archive
 * Really just a convenience script; no unique/complicated logic
+
+## time_prog ##
+* Library of Python functions focused around automating: 
+	* The compilation of C source code and 
+	* The collection of a large sample size of execution times of the resulting
+      executable
+* Was written to facilitate data collection for my final project for `CMSC 22200
+  Computer Architecture`
+
+## time_prog_stats ##
+* Python script that:
+	* Compiles C source code,
+	* Executes the resulting executable a user-specified number of times,
+      recording the execution time of each trial,
+	* Outputs relevant metrics (mean, standard deviation, and a fancy Normal
+      plot of the resulting distribution), and finally
+	* "Garbage collects" (by which I really mean it just deletes the executable)
+ * Was written to facilitate data collection for my final project for `CMSC
+   22200 Computer Architecture`
+ * Uses the functions from `time_prog`
+ * **Work in progress**. The implementation is still very hacky and tied into
+   the specific needs of my project at the time; it uses a multitude of
+   hard-coded values that probably would render this script unuseable outside of
+   my directory tree. As such, *I would not recommend using this right now.* Of
+   course, feel free to take it and modify it to suit your needs; sharing is
+   caring. 
