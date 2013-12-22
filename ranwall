@@ -5,6 +5,11 @@ then
     echo "usage: ${PROGNAME} <wallpaper root dir>"
 fi
 
+if [ ! $(command -v feh) ]
+then
+    echo "${PROGNAME} uses feh. Please install feh before use."
+fi
+
 DIR=$1
 EXCLUDE="/Girls/" # sue me
 
