@@ -34,12 +34,12 @@
 	* Outputs relevant metrics (mean, standard deviation, and a fancy Normal
       plot of the resulting distribution), and finally
 	* "Garbage collects" (by which I really mean it just deletes the executable)
- * Was written to facilitate data collection for my final project for `CMSC
-   22200 Computer Architecture`
- * Uses the functions from `time_prog`
- * **Work in progress**. The implementation is still very hacky and tied into
-   the specific needs of my project at the time; it uses a multitude of
-   hard-coded values that probably would render this script unuseable outside of
-   my directory tree. As such, *I would not recommend using this right now.* Of
-   course, feel free to take it and modify it to suit your needs; sharing is
-   caring. 
+* Was written to facilitate data collection for my final project for `CMSC
+  22200 Computer Architecture`
+* Uses the functions from `time_prog`
+* **Work in progress**. The implementation is still very hacky and tied into
+  the specific needs of my project at the time; it uses a multitude of
+  hard-coded values that probably would render this script unuseable outside of
+  my directory tree. As such, *I would not recommend using this right now.* Of
+  course, feel free to take it and modify it to suit your needs; sharing is
+  caring. 
