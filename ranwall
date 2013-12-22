@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DIR=/home/jjin/Dropbox/Images/Wallpapers/ # TODO: decouple to argument
+DIR=$1
 EXCLUDE="/Girls/" # sue me
 
 NUMWALL=$(xrandr -q | grep connected | grep -v disconnected | wc -l)

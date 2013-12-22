@@ -2,6 +2,7 @@
 
 PROGNAME=$(basename $0)
 CMD=/home/jjin/bin/ranwall
+DIR=/home/jjin/Dropbox/Images/Wallpaper
 
 if [ $# -eq 0 ]
 then
@@ -10,6 +11,6 @@ then
 fi
 
 while true; do
-    $CMD
+    $CMD $DIR
     sleep $1m
 done
