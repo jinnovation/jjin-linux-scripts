@@ -17,9 +17,9 @@ num_trials=int(argv[3])
 prog_dir  = "procs/" + prog_name + "/"
 plots_dir = "plots/"
 
-dists = []
+dists         = []
 dists_handles = []
-dists_labels = []
+dists_labels  = []
 
 prog_versions = os.listdir(prog_dir).reverse()
 
