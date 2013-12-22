@@ -1,8 +1,10 @@
 #!/bin/sh
+PROGNAME=$(basename $0)
 
 if [ $# -eq 0 ]
 then
     echo "usage: ${PROGNAME} <wallpaper root dir>"
+    exit 1
 fi
 
 if [ ! $(command -v feh) ]
