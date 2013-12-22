@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ $# -eq 0 ]
+then
+    echo "usage: ${PROGNAME} <wallpaper root dir>"
+fi
+
 DIR=$1
 EXCLUDE="/Girls/" # sue me
 
