@@ -21,4 +21,5 @@ NUMWALL=$(xrandr -q | grep connected | grep -v disconnected | wc -l)
 # TODO: find a way to shorten??
 IMGS=$(find $DIR -type f \( -name '*.jpg'  -o -name '*.jpeg' -o -name '*.png' \) -print | egrep -v $EXCLUDE | shuf -n $NUMWALL | tr "\\n" " ")
 
-notify-send $(feh --bg-fill --no-fehbg ${IMGS})
+
+feh --bg-fill --no-fehbg ${IMGS}
