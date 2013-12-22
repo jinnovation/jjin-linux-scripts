@@ -1,0 +1,38 @@
+#!/usr/bin/python
+
+# TODO: re-implement standalone usage of time_prog (with "__main__")
+from os         import path, devnull
+from sys        import argv, stderr, stdout
+from subprocess import call
+from time       import time
+from numpy      import mean, std, linspace
+from math       import floor
+
+def compile_c(prog_name, prog_path, optimize_lvl):
+    if int(optimize_lvl)==0:
+        call(["gcc", "-o", prog_name, prog_path])
+    else:
+        call(["gcc", "-O"+str(optimize_lvl), "-o", prog_name, prog_path])
+
+def rm(prog_name):
+    call(["rm", prog_name])        
+
+def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
+    prog_name_stripped = path.splitext(path.basename(prog_name))[0]
+    
+    compile_c(prog_name_stripped, prog_path, optimize_lvl)
+    
+    exec_times = []
+    for i in range(test_count):
+        stdout.flush()
+        stdout.write("\r" + str(i+1)) # ticker
+
+        begin_time   =  time()        
+        call(["./"+prog_name_stripped], stdout=open(devnull, "w"))
+        end_time     =  time()
+
+        exec_times.append((end_time - begin_time)*1000)
+
+    rm(prog_name_stripped)
+    exec_time_stats = {"mean": mean(exec_times), "stdev": std(exec_times)}
+    return exec_time_stats
