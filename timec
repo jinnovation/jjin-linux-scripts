@@ -14,9 +14,9 @@ def compile_c(prog_name, prog_path, optimize_lvl):
         call(["gcc", "-O"+str(optimize_lvl), "-o", prog_name, prog_path])
 
 def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
-    prog_name_stripped = path.splitext(path.basename(prog_name))[0]
+    prog_basename = path.splitext(path.basename(prog_name))[0]
     
-    compile_c(prog_name_stripped, prog_path, optimize_lvl)
+    compile_c(prog_basename, prog_path, optimize_lvl)
     
     exec_times = []
     for i in range(test_count):
@@ -25,14 +25,14 @@ def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
         stdout.write("\r" + str(i+1)) # ticker
 
         begin_time   =  time()        
-        call(["./"+prog_name_stripped], stdout=open(devnull, "w"))
+        call(["./"+prog_basename], stdout=open(devnull, "w"))
         end_time     =  time()
 
         exec_times.append((end_time - begin_time)*1000)
 
-    call(["rm", prog_name])
-    exec_time_stats = {"mean": mean(exec_times), "stdev": std(exec_times)}
-    return exec_time_stats
+    call(["rm", prog_basename])
+    
+    return {"mean": mean(exec_times), "stdev": std(exec_times)}
     
 if __name__ == "__main__":
     help_numtrials = """
