@@ -39,3 +39,12 @@ def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
     return exec_time_stats
 
 # TODO: re-implement standalone usage of time_prog (with "__main__")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Time your C program.")
+    parser.add_argument("-n", "--num-trials", type=int, default=100,
+                        help="the number of execution time trials you would like
+                to run")
+    # TODO: add prog_name argument
+    # TODO: add optimize_lvl argument
+    parser.parse_args()
+    print("Hello world")
