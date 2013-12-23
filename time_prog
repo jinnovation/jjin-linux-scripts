@@ -58,10 +58,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     if args.verbosity:
-        # TODO
-
-    result = retrieve_exec_time_stats(path.basename(args.sourcepath),
-                                      args.sourcepath, args.numtrials,
-                                      args.optimizelevel)
-
-    print(result)
+        pass # TODO
+        
+print(retrieve_exec_time_stats(path.basename(args.sourcepath),
+                               args.sourcepath, args.numtrials,
+                               args.optimizelevel))
