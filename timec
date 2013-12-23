@@ -13,13 +13,13 @@ def compile_c(prog_name, prog_path, optimize_lvl):
     else:
         call(["gcc", "-O"+str(optimize_lvl), "-o", prog_name, prog_path])
 
-def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
+def retrieve_exec_time_stats(prog_name, prog_path, num_trials, optimize_lvl):
     prog_basename = path.splitext(path.basename(prog_name))[0]
     
     compile_c(prog_basename, prog_path, optimize_lvl)
     
     exec_times = []
-    for i in range(test_count):
+    for i in range(num_trials):
         # TODO: move this out to verbosity
         stdout.flush()
         stdout.write("\r" + str(i+1)) # ticker
@@ -35,7 +35,7 @@ def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
     return {"mean": mean(exec_times), "stdev": std(exec_times)}
     
 if __name__ == "__main__":
-    help_numtrials = """
+    help_num_trials = """
     the number of execution time trials you would like to run (default: 100)
     """
     help_optimizelevel = """
@@ -43,10 +43,10 @@ if __name__ == "__main__":
     """
 
     parser = argparse.ArgumentParser(description="Time your C program.")
-    parser.add_argument("-n", type=int, default=100, help=help_numtrials,
-                        dest="numtrials") 
+    parser.add_argument("-n", type=int, default=100, help=help_num_trials,
+                        dest="num_trials") 
     parser.add_argument("-o", type=int, default=0, help=help_optimizelevel,
-                        dest="optimizelevel")
+                        dest="optimize_lvl")
     parser.add_argument("-v", "--verbose", dest="verbosity", action="store_true")
     parser.add_argument("sourcepath", metavar="<source path>")
 
@@ -55,5 +55,5 @@ if __name__ == "__main__":
         pass # TODO
         
     print(retrieve_exec_time_stats(path.basename(args.sourcepath),
-                                   args.sourcepath, args.numtrials,
-                                   args.optimizelevel))
+                                   args.sourcepath, args.num_trials,
+                                   args.optimize_lvl))
