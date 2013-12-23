@@ -5,6 +5,7 @@ import matplotlib.mlab   as mlab
 from time_prog           import *
 from sys                 import argv, stderr
 
+# TODO: improve arg parsing (use argparse)
 if len(argv)<4:
     stderr.write("usage: time_prog_stats.py <prog name> ")
     stderr.write("<optimization lvl> <numTrials>\n")
@@ -14,6 +15,7 @@ prog_name = argv[1]
 optimize_lvl=int(argv[2])
 num_trials=int(argv[3])
 
+# TODO: make these specs optional (chosen via args)
 prog_dir  = "procs/" + prog_name + "/"
 plots_dir = "plots/"
 
