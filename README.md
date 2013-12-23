@@ -28,7 +28,7 @@
 * When executed by itself, returns mean and standard deviation information
   regarding execution time sampling of the program
 
-## time_prog_stats ##
+## timec_stats ##
 * Python script that:
 	* Compiles C source code,
 	* Executes the resulting executable a user-specified number of times,
