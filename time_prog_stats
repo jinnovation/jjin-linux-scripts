@@ -19,6 +19,8 @@ num_trials=int(argv[3])
 prog_dir  = "procs/" + prog_name + "/"
 plots_dir = "plots/"
 
+# TODO: add argument for verbosity (print results of indiv trials etc.)
+
 dists         = []
 dists_handles = []
 dists_labels  = []
