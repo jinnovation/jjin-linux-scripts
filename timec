@@ -1,7 +1,5 @@
 #!/usr/bin/python
-
 import argparse
-
 from os         import path, devnull
 from sys        import argv, stderr, stdout
 from subprocess import call
