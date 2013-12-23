@@ -25,6 +25,8 @@
       executable
 * Was written to facilitate data collection for my final project for `CMSC 22200
   Computer Architecture`
+* When executed by itself, returns mean and standard deviation information
+  regarding execution time sampling of the program
 
 ## time_prog_stats ##
 * Python script that:
