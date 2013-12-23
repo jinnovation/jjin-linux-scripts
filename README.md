@@ -18,7 +18,7 @@
 * `unzip` to directory of same name as archive
 * Really just a convenience script; no unique/complicated logic
 
-## time_prog ##
+## timec ##
 * Library of Python functions focused around automating: 
 	* The compilation of C source code and 
 	* The collection of a large sample size of execution times of the resulting
@@ -38,7 +38,7 @@
 	* "Garbage collects" (by which I really mean it just deletes the executable)
 * Was written to facilitate data collection for my final project for `CMSC
   22200 Computer Architecture`
-* Uses the functions from `time_prog`
+* Uses the functions from `timec`
 * **Work in progress**. The implementation is still very hacky and tied into
   the specific needs of my project at the time; it uses a multitude of
   hard-coded values that probably would render this script unuseable outside of
