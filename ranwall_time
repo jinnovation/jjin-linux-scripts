@@ -3,6 +3,7 @@
 PROGNAME=$(basename $0)
 CMD=/home/jjin/bin/ranwall
 DIR=/home/jjin/Dropbox/Images/Wallpapers
+# TODO: decouple dir to arg
 
 if [ $# -eq 0 ]
 then
