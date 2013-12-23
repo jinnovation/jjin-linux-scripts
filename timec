@@ -13,9 +13,6 @@ def compile_c(prog_name, prog_path, optimize_lvl):
     else:
         call(["gcc", "-O"+str(optimize_lvl), "-o", prog_name, prog_path])
 
-def rm(prog_name):
-    call(["rm", prog_name])        
-
 def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
     prog_name_stripped = path.splitext(path.basename(prog_name))[0]
     
@@ -33,7 +30,7 @@ def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
 
         exec_times.append((end_time - begin_time)*1000)
 
-    rm(prog_name_stripped)
+    call(["rm", prog_name])
     exec_time_stats = {"mean": mean(exec_times), "stdev": std(exec_times)}
     return exec_time_stats
     
