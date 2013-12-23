@@ -1,0 +1,65 @@
+na#!/usr/bin/python
+
+import argparse
+
+from os         import path, devnull
+from sys        import argv, stderr, stdout
+from subprocess import call
+from time       import time
+from numpy      import mean, std, linspace
+from math       import floor
+
+def compile_c(prog_name, prog_path, optimize_lvl):
+    if int(optimize_lvl)==0:
+        call(["gcc", "-o", prog_name, prog_path])
+    else:
+        call(["gcc", "-O"+str(optimize_lvl), "-o", prog_name, prog_path])
+
+def rm(prog_name):
+    call(["rm", prog_name])        
+
+def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
+    prog_name_stripped = path.splitext(path.basename(prog_name))[0]
+    
+    compile_c(prog_name_stripped, prog_path, optimize_lvl)
+    
+    exec_times = []
+    for i in range(test_count):
+        # TODO: move this out to verbosity
+        stdout.flush()
+        stdout.write("\r" + str(i+1)) # ticker
+
+        begin_time   =  time()        
+        call(["./"+prog_name_stripped], stdout=open(devnull, "w"))
+        end_time     =  time()
+
+        exec_times.append((end_time - begin_time)*1000)
+
+    rm(prog_name_stripped)
+    exec_time_stats = {"mean": mean(exec_times), "stdev": std(exec_times)}
+    return exec_time_stats
+    
+# TODO: re-implement standalone usage of time_prog (with "__main__")
+if __name__ == "__main__":
+    help_numtrials = """
+    the number of execution time trials you would like to run (default: 100)
+    """
+    help_optimizelevel = """
+    desired GCC optimization flag level (default: 0, i.e. non-existent)
+    """
+
+    parser = argparse.ArgumentParser(description="Time your C program.")
+    parser.add_argument("-n", type=int, default=100, help=help_numtrials,
+                        dest="numtrials") 
+    parser.add_argument("-o", type=int, default=0, help=help_optimizelevel,
+                        dest="optimizelevel")
+    parser.add_argument("-v", "--verbose", dest="verbosity", action="store_true")
+    parser.add_argument("sourcepath", metavar="<source path>")
+
+    args = parser.parse_args()
+    if args.verbosity:
+        pass # TODO
+        
+print(retrieve_exec_time_stats(path.basename(args.sourcepath),
+                               args.sourcepath, args.numtrials,
+                               args.optimizelevel))
