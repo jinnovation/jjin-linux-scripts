@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
-# TODO: re-implement standalone usage of time_prog (with "__main__")
+import argparse
+
 from os         import path, devnull
 from sys        import argv, stderr, stdout
 from subprocess import call
@@ -36,3 +37,5 @@ def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
     rm(prog_name_stripped)
     exec_time_stats = {"mean": mean(exec_times), "stdev": std(exec_times)}
     return exec_time_stats
+
+# TODO: re-implement standalone usage of time_prog (with "__main__")
