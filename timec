@@ -22,14 +22,15 @@ def retrieve_exec_time_stats(prog_name, prog_path, num_trials, optimize_lvl):
     for i in range(num_trials):
         # TODO: move this out to verbosity
         stdout.flush()
-        stdout.write("\r" + str(i+1)) # ticker
+        stdout.write("\rTrial number: " + str(i+1)) # ticker
 
         begin_time   =  time()        
         call(["./"+prog_basename], stdout=open(devnull, "w"))
         end_time     =  time()
 
         exec_times.append((end_time - begin_time)*1000)
-
+    stdout.write("\n")
+        
     call(["rm", prog_basename])
     
     return {"mean": mean(exec_times), "stdev": std(exec_times)}
