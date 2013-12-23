@@ -1,4 +1,4 @@
-na#!/usr/bin/python
+#!/usr/bin/python
 
 import argparse
 
@@ -59,6 +59,6 @@ if __name__ == "__main__":
     if args.verbosity:
         pass # TODO
         
-print(retrieve_exec_time_stats(path.basename(args.sourcepath),
-                               args.sourcepath, args.numtrials,
-                               args.optimizelevel))
+    print(retrieve_exec_time_stats(path.basename(args.sourcepath),
+                                   args.sourcepath, args.numtrials,
+                                   args.optimizelevel))
