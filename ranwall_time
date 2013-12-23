@@ -2,7 +2,7 @@
 
 PROGNAME=$(basename $0)
 CMD=/home/jjin/bin/ranwall
-DIR=/home/jjin/Dropbox/Images/Wallpaper
+DIR=/home/jjin/Dropbox/Images/Wallpapers
 
 if [ $# -eq 0 ]
 then
