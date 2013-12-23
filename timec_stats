@@ -1,0 +1,56 @@
+#!/usr/bin/python
+import os
+import matplotlib.pyplot as pyplot
+import matplotlib.mlab   as mlab
+from time_prog           import *
+from sys                 import argv, stderr
+
+# TODO: improve arg parsing (use argparse)
+if len(argv)<4:
+    stderr.write("usage: time_prog_stats.py <prog name> ")
+    stderr.write("<optimization lvl> <numTrials>\n")
+    quit()
+
+prog_name = argv[1]
+optimize_lvl=int(argv[2])
+num_trials=int(argv[3])
+
+# TODO: make these specs optional (chosen via args)
+prog_dir  = "procs/" + prog_name + "/"
+plots_dir = "plots/"
+
+# TODO: add argument for verbosity (print results of indiv trials etc.)
+
+dists         = []
+dists_handles = []
+dists_labels  = []
+
+prog_versions = os.listdir(prog_dir).reverse()
+
+for version in prog_versions:
+    exec_time_stats = retrieve_exec_time_stats(version, prog_dir+version,
+                                               num_trials, optimize_lvl)
+
+    x_axis_ends = {"min": exec_time_stats["mean"]-exec_time_stats["stdev"]*3,
+                   "max": exec_time_stats["mean"]+exec_time_stats["stdev"]*3}
+    
+    x_axis = linspace(x_axis_ends["min"], x_axis_ends["max"], 100)
+    dist = mlab.normpdf(x_axis, exec_time_stats["mean"],
+                        exec_time_stats["stdev"])
+    plot = pyplot.plot(x_axis, dist)
+    dist_handle, = plot
+    dists_handles.append(dist_handle)
+    dists_labels.append(path.splitext(path.basename(version))[0])
+
+    print(version+":")
+    print(exec_time_stats)
+
+    
+pyplot.legend(dists_handles, dists_labels, "upper right")
+pyplot.ylabel("Probability")
+pyplot.xlabel("Execution time (ms)")
+pyplot.title("Execution time distributions for "+prog_name +
+             " (optimization level " + str(optimize_lvl) +")")
+
+pyplot.savefig(plots_dir+prog_name +"_"+str(optimize_lvl)+".png",
+               bbox_inches=0)
