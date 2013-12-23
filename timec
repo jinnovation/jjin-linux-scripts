@@ -39,7 +39,6 @@ def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
     exec_time_stats = {"mean": mean(exec_times), "stdev": std(exec_times)}
     return exec_time_stats
     
-# TODO: re-implement standalone usage of time_prog (with "__main__")
 if __name__ == "__main__":
     help_numtrials = """
     the number of execution time trials you would like to run (default: 100)
