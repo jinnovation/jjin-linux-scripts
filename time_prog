@@ -25,6 +25,7 @@ def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
     
     exec_times = []
     for i in range(test_count):
+        # TODO: move this out to verbosity
         stdout.flush()
         stdout.write("\r" + str(i+1)) # ticker
 
@@ -37,14 +38,30 @@ def retrieve_exec_time_stats(prog_name, prog_path, test_count, optimize_lvl):
     rm(prog_name_stripped)
     exec_time_stats = {"mean": mean(exec_times), "stdev": std(exec_times)}
     return exec_time_stats
-
+    
 # TODO: re-implement standalone usage of time_prog (with "__main__")
 if __name__ == "__main__":
+    help_numtrials = """
+    the number of execution time trials you would like to run (default: 100)
+    """
+    help_optimizelevel = """
+    desired GCC optimization flag level (default: 0, i.e. non-existent)
+    """
+
     parser = argparse.ArgumentParser(description="Time your C program.")
-    parser.add_argument("-n", "--num-trials", type=int, default=100,
-                        help="the number of execution time trials you would like
-                to run")
-    # TODO: add prog_name argument
-    # TODO: add optimize_lvl argument
-    parser.parse_args()
-    print("Hello world")
+    parser.add_argument("-n", type=int, default=100, help=help_numtrials,
+                        dest="numtrials") 
+    parser.add_argument("-o", type=int, default=0, help=help_optimizelevel,
+                        dest="optimizelevel")
+    parser.add_argument("-v", "--verbose", dest="verbosity", action="store_true")
+    parser.add_argument("sourcepath", metavar="<source path>")
+
+    args = parser.parse_args()
+    if args.verbosity:
+        print("Hello world")
+
+    result = retrieve_exec_time_stats(path.basename(args.sourcepath),
+                                      args.sourcepath, args.numtrials,
+                                      args.optimizelevel)
+
+    print(result)
