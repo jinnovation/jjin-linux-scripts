@@ -18,10 +18,10 @@ desired GCC optimization flag level (default: 0, i.e. non-existent)
 parser = argparse.ArgumentParser(description=script_description)
 parser.add_argument("-n", type=int, default=100, help=help_num_trials,
                     dest="num_trials")
-parser.add_argument("-o", type=int, default=0,help=help_optimizelevel
+parser.add_argument("-o", type=int, default=0,help=help_optimizelevel,
                     dest="optimize_lvl")
 parser.add_argument("-v", "--verbose", dest="verbose", action="store_true")
-parser.add_argument("rootdir", metavar="<root dir>")
+parser.add_argument("progname", dest="prog_name", metavar="<prog name>")
 
 args.parse_args()
 
@@ -31,9 +31,9 @@ args.parse_args()
 #     stderr.write("<optimization lvl> <numTrials>\n")
 #     quit()
 
-prog_name = argv[1]
-optimize_lvl=int(argv[2])
-num_trials=
+
+# TODO: decouple this from personal filesystem hierarchy
+prog_name = args.prog_name
 
 # TODO: make these specs optional (chosen via args)
 prog_dir  = "procs/" + prog_name + "/"
