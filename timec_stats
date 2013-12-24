@@ -29,6 +29,7 @@ args.parse_args()
 prog_name = args.prog_name
 
 # TODO: make these specs optional (chosen via args)
+# TODO: change implementation: take in list of sourcefiles, time those
 prog_dir  = "procs/" + prog_name + "/"
 plots_dir = "plots/"
 
