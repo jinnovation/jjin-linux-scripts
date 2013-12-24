@@ -25,13 +25,6 @@ parser.add_argument("progname", dest="prog_name", metavar="<prog name>")
 
 args.parse_args()
 
-# TODO: improve arg parsing (use argparse)
-# if len(argv)<4:
-#     stderr.write("usage: time_prog_stats.py <prog name> ")
-#     stderr.write("<optimization lvl> <numTrials>\n")
-#     quit()
-
-
 # TODO: decouple below values from CMSC222 project dir hierarchy
 prog_name = args.prog_name
 
@@ -39,7 +32,7 @@ prog_name = args.prog_name
 prog_dir  = "procs/" + prog_name + "/"
 plots_dir = "plots/"
 
-# TODO: add argument for verbosity (print results of indiv trials etc.)
+# TODO: implement verbosity
 
 dists         = []
 dists_handles = []
