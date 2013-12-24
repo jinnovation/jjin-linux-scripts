@@ -35,26 +35,26 @@ def retrieve_exec_time_stats(prog_name, prog_path, num_trials, optimize_lvl):
     
     return {"mean": mean(exec_times), "stdev": std(exec_times)}
     
-# if __name__ == "__main__":
-#     help_num_trials = """
-#     the number of execution time trials you would like to run (default: 100)
-#     """
-#     help_optimizelevel = """
-#     desired GCC optimization flag level (default: 0, i.e. non-existent)
-#     """
+if __name__ == "__main__":
+    help_num_trials = """
+    the number of execution time trials you would like to run (default: 100)
+    """
+    help_optimizelevel = """
+    desired GCC optimization flag level (default: 0, i.e. non-existent)
+    """
 
-#     parser = argparse.ArgumentParser(description="Time your C program.")
-#     parser.add_argument("-n", type=int, default=100, help=help_num_trials,
-#                         dest="num_trials") 
-#     parser.add_argument("-o", type=int, default=0, help=help_optimizelevel,
-#                         dest="optimize_lvl")
-#     parser.add_argument("-v", "--verbose", dest="verbose", action="store_true")
-#     parser.add_argument("sourcepath", metavar="<source path>")
+    parser = argparse.ArgumentParser(description="Time your C program.")
+    parser.add_argument("-n", type=int, default=100, help=help_num_trials,
+                        dest="num_trials") 
+    parser.add_argument("-o", type=int, default=0, help=help_optimizelevel,
+                        dest="optimize_lvl")
+    parser.add_argument("-v", "--verbose", dest="verbose", action="store_true")
+    parser.add_argument("sourcepath", metavar="<source path>")
 
-#     args = parser.parse_args()
-#     if args.verbose:
-#         pass # TODO
+    args = parser.parse_args()
+    if args.verbose:
+        pass # TODO
         
-#     print(retrieve_exec_time_stats(path.basename(args.sourcepath),
-#                                    args.sourcepath, args.num_trials,
-#                                    args.optimize_lvl))
+    print(retrieve_exec_time_stats(path.basename(args.sourcepath),
+                                   args.sourcepath, args.num_trials,
+                                   args.optimize_lvl))
