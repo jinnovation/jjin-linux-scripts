@@ -1,19 +1,39 @@
 #!/usr/bin/python
+import argparse
 import os
 import matplotlib.pyplot as pyplot
 import matplotlib.mlab   as mlab
 from time_prog           import *
 from sys                 import argv, stderr
 
+script_description = "Time your C program (with statistical graphic analysis)"
+
+help_num_trials = """
+the number of execution time trials you would like to run (default: 100)
+"""
+help_optimizelevel = """
+desired GCC optimization flag level (default: 0, i.e. non-existent)
+"""
+
+parser = argparse.ArgumentParser(description=script_description)
+parser.add_argument("-n", type=int, default=100, help=help_num_trials,
+                    dest="num_trials")
+parser.add_argument("-o", type=int, default=0,help=help_optimizelevel
+                    dest="optimize_lvl")
+parser.add_argument("-v", "--verbose", dest="verbose", action="store_true")
+parser.add_argument("rootdir", metavar="<root dir>")
+
+args.parse_args()
+
 # TODO: improve arg parsing (use argparse)
-if len(argv)<4:
-    stderr.write("usage: time_prog_stats.py <prog name> ")
-    stderr.write("<optimization lvl> <numTrials>\n")
-    quit()
+# if len(argv)<4:
+#     stderr.write("usage: time_prog_stats.py <prog name> ")
+#     stderr.write("<optimization lvl> <numTrials>\n")
+#     quit()
 
 prog_name = argv[1]
 optimize_lvl=int(argv[2])
-num_trials=int(argv[3])
+num_trials=
 
 # TODO: make these specs optional (chosen via args)
 prog_dir  = "procs/" + prog_name + "/"
@@ -29,7 +49,7 @@ prog_versions = os.listdir(prog_dir).reverse()
 
 for version in prog_versions:
     exec_time_stats = retrieve_exec_time_stats(version, prog_dir+version,
-                                               num_trials, optimize_lvl)
+                                               args.num_trials, args.optimize_lvl)
 
     x_axis_ends = {"min": exec_time_stats["mean"]-exec_time_stats["stdev"]*3,
                    "max": exec_time_stats["mean"]+exec_time_stats["stdev"]*3}
