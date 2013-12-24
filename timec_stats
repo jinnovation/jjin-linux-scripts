@@ -3,7 +3,7 @@ import argparse
 import os
 import matplotlib.pyplot as pyplot
 import matplotlib.mlab   as mlab
-from time_prog           import *
+from timec               import *
 from sys                 import argv, stderr
 
 script_description = "Time your C program (with statistical graphic analysis)"
@@ -32,7 +32,7 @@ args.parse_args()
 #     quit()
 
 
-# TODO: decouple this from personal filesystem hierarchy
+# TODO: decouple below values from CMSC222 project dir hierarchy
 prog_name = args.prog_name
 
 # TODO: make these specs optional (chosen via args)
