@@ -1,6 +1,7 @@
 #!/bin/bash
 PROGNAME=$(basename $0)
 
+# TODO: migrate to getopt
 REQARGS=1
 
 if [ $# -lt $REQARGS ]
