@@ -6,23 +6,20 @@ from timec               import *
 
 DESCRIP_SCRIPT = "Time your C program (with statistical graphic analysis)"
 
+HELP_OUTPUTDIR = "Directory to place graphic output into (default: current)"
+
 parser = argparse.ArgumentParser(description=DESCRIP_SCRIPT)
 parser.add_argument("-n", type=int, default=100, help=HELP_NUMTRIALS,
                     dest="num_trials")
 parser.add_argument("-o", type=int, default=0,help=HELP_OPTIMIZE,
                     dest="optimize_lvl")
 parser.add_argument("-v", "--verbose", dest="verbose", action="store_true")
-parser.add_argument("progname", metavar="<prog name>")
+parser.add_argument("-d", default="./", help=HELP_OUTPUTDIR,
+                    dest="output_dir")
+parser.add_argument("testfiles", metavar="<test files>", nargs="+")
+# TODO: argument for plot title
 
 args = parser.parse_args()
-
-# TODO: decouple below values from CMSC222 project dir hierarchy
-prog_name = args.progname
-
-# TODO: make these specs optional (chosen via args)
-# TODO: change implementation: take in list of sourcefiles, time those
-prog_dir  = "procs/" + prog_name + "/"
-plots_dir = "plots/"
 
 # TODO: implement verbosity
 
@@ -30,10 +27,8 @@ dists         = []
 dists_handles = []
 dists_labels  = []
 
-prog_versions = os.listdir(prog_dir)
-
-for version in prog_versions:
-    exec_time_stats = retrieve_exec_time_stats(version, prog_dir+version,
+for file in args.testfiles:
+    exec_time_stats = retrieve_exec_time_stats(file, file,
                                                      args.num_trials,
                                                      args.optimize_lvl)
 
@@ -46,16 +41,16 @@ for version in prog_versions:
     plot = pyplot.plot(x_axis, dist)
     dist_handle, = plot
     dists_handles.append(dist_handle)
-    dists_labels.append(path.splitext(path.basename(version))[0])
+    dists_labels.append(path.splitext(path.basename(file))[0])
 
-    print(version+":")
+    print(file+":")
     print(exec_time_stats)
     
 pyplot.legend(dists_handles, dists_labels, "upper right")
 pyplot.ylabel("Probability")
 pyplot.xlabel("Execution time (ms)")
-pyplot.title("Execution time distributions for "+prog_name +
+pyplot.title("TODO" +
              " (optimization level " + str(args.optimize_lvl) +")")
 
-pyplot.savefig(plots_dir+prog_name +"_"+str(args.optimize_lvl)+".png",
+pyplot.savefig(args.output_dir+"plot" +"_"+str(args.optimize_lvl)+".png",
                bbox_inches=0)
