@@ -16,7 +16,7 @@ parser.add_argument("-o", type=int, default=0,help=HELP_OPTIMIZE,
 parser.add_argument("-v", "--verbose", dest="verbose", action="store_true")
 parser.add_argument("-d", default="./", help=HELP_OUTPUTDIR,
                     dest="output_dir")
-parser.add_argument("testfiles", metavar="<test files>", nargs="+")
+parser.add_argument("testfiles", metavar="<test file>", nargs="+")
 # TODO: argument for plot title
 
 args = parser.parse_args()
@@ -28,9 +28,8 @@ dists_handles = []
 dists_labels  = []
 
 for file in args.testfiles:
-    exec_time_stats = retrieve_exec_time_stats(file, file,
-                                                     args.num_trials,
-                                                     args.optimize_lvl)
+    exec_time_stats = retrieve_exec_time_stats(file, file, args.num_trials,
+                                               args.optimize_lvl)
 
     x_axis_ends = {"min": exec_time_stats["mean"]-exec_time_stats["stdev"]*3,
                    "max": exec_time_stats["mean"]+exec_time_stats["stdev"]*3}
@@ -43,8 +42,9 @@ for file in args.testfiles:
     dists_handles.append(dist_handle)
     dists_labels.append(path.splitext(path.basename(file))[0])
 
-    print(file+":")
-    print(exec_time_stats)
+    if args.verbose:
+        print(file+":")
+        print(exec_time_stats)
     
 pyplot.legend(dists_handles, dists_labels, "upper right")
 pyplot.ylabel("Probability")
