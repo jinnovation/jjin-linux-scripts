@@ -28,8 +28,8 @@ def compile_c(prog_name, prog_path, optimize_lvl):
     else:
         call([COMPILER, "-O"+str(optimize_lvl), "-o", prog_name, prog_path])
 
-def retrieve_exec_time_stats(prog_name, prog_path, num_trials, optimize_lvl):
-    prog_basename = path.splitext(path.basename(prog_name))[0]
+def retrieve_exec_time_stats(prog_path, num_trials, optimize_lvl):
+    prog_basename = path.splitext(path.basename(prog_path))[0]
     
     compile_c(prog_basename, prog_path, optimize_lvl)
     
@@ -65,6 +65,5 @@ if __name__ == "__main__":
     if args.verbose:
         IS_VERBOSE = True
         
-    print(retrieve_exec_time_stats(path.basename(args.sourcepath),
-                                   args.sourcepath, args.num_trials,
+    print(retrieve_exec_time_stats(args.sourcepath, args.num_trials,
                                    args.optimize_lvl))
