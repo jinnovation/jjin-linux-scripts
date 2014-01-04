@@ -35,7 +35,7 @@ def retrieve_exec_time_stats(prog_name, prog_path, num_trials, optimize_lvl):
     
     exec_times = []
     for i in range(num_trials):
-        # TODO: move this out to verbosity
+        # TODO: make this verbosity set-able from timec_stats
         if IS_VERBOSE:
             stdout.flush()
             stdout.write("\rTrial number: " + str(i+1)) # ticker
