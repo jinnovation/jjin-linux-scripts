@@ -20,6 +20,8 @@ desired GCC optimization flag level (0, 1, 2, or 3)
 (default: 0, i.e. non-existent)
 """
 
+IS_VERBOSE = False
+
 def compile_c(prog_name, prog_path, optimize_lvl):
     if int(optimize_lvl)==0:
         call([COMPILER, "-o", prog_name, prog_path])
@@ -34,8 +36,9 @@ def retrieve_exec_time_stats(prog_name, prog_path, num_trials, optimize_lvl):
     exec_times = []
     for i in range(num_trials):
         # TODO: move this out to verbosity
-        stdout.flush()
-        stdout.write("\rTrial number: " + str(i+1)) # ticker
+        if IS_VERBOSE:
+            stdout.flush()
+            stdout.write("\rTrial number: " + str(i+1)) # ticker
 
         begin_time   =  time()        
         call(["./"+prog_basename], stdout=open(devnull, "w"))
@@ -51,7 +54,7 @@ def retrieve_exec_time_stats(prog_name, prog_path, num_trials, optimize_lvl):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=DESCRIP_PROG)
-    parser.add_argument("-n", type=int, default=100, help=HELP_NUMTRIALSa,
+    parser.add_argument("-n", type=int, default=100, help=HELP_NUMTRIALS,
                         dest="num_trials") 
     parser.add_argument("-o", type=int, default=0, help=HELP_OPTIMIZE,
                         choices=[0,1,2,3], dest="optimize_lvl")
@@ -60,7 +63,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     if args.verbose:
-        pass # TODO
+        IS_VERBOSE = True
         
     print(retrieve_exec_time_stats(path.basename(args.sourcepath),
                                    args.sourcepath, args.num_trials,
