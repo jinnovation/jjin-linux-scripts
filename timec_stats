@@ -1,32 +1,23 @@
 #!/usr/bin/python
-import argparse
 import os
 import matplotlib.pyplot as pyplot
 import matplotlib.mlab   as mlab
 from timec               import *
-from sys                 import argv, stderr
 
-script_description = "Time your C program (with statistical graphic analysis)"
+DESCRIP_SCRIPT = "Time your C program (with statistical graphic analysis)"
 
-help_num_trials = """
-the number of execution time trials you would like to run (default: 100)
-"""
-help_optimizelevel = """
-desired GCC optimization flag level (default: 0, i.e. non-existent)
-"""
-
-parser = argparse.ArgumentParser(description=script_description)
-parser.add_argument("-n", type=int, default=100, help=help_num_trials,
+parser = argparse.ArgumentParser(description=DESCRIP_SCRIPT)
+parser.add_argument("-n", type=int, default=100, help=HELP_NUMTRIALS,
                     dest="num_trials")
-parser.add_argument("-o", type=int, default=0,help=help_optimizelevel,
+parser.add_argument("-o", type=int, default=0,help=HELP_OPTIMIZE,
                     dest="optimize_lvl")
 parser.add_argument("-v", "--verbose", dest="verbose", action="store_true")
-parser.add_argument("progname", dest="prog_name", metavar="<prog name>")
+parser.add_argument("progname", metavar="<prog name>")
 
-args.parse_args()
+args = parser.parse_args()
 
 # TODO: decouple below values from CMSC222 project dir hierarchy
-prog_name = args.prog_name
+prog_name = args.progname
 
 # TODO: make these specs optional (chosen via args)
 # TODO: change implementation: take in list of sourcefiles, time those
@@ -39,11 +30,12 @@ dists         = []
 dists_handles = []
 dists_labels  = []
 
-prog_versions = os.listdir(prog_dir).reverse()
+prog_versions = os.listdir(prog_dir)
 
 for version in prog_versions:
     exec_time_stats = retrieve_exec_time_stats(version, prog_dir+version,
-                                               args.num_trials, args.optimize_lvl)
+                                                     args.num_trials,
+                                                     args.optimize_lvl)
 
     x_axis_ends = {"min": exec_time_stats["mean"]-exec_time_stats["stdev"]*3,
                    "max": exec_time_stats["mean"]+exec_time_stats["stdev"]*3}
@@ -58,13 +50,12 @@ for version in prog_versions:
 
     print(version+":")
     print(exec_time_stats)
-
     
 pyplot.legend(dists_handles, dists_labels, "upper right")
 pyplot.ylabel("Probability")
 pyplot.xlabel("Execution time (ms)")
 pyplot.title("Execution time distributions for "+prog_name +
-             " (optimization level " + str(optimize_lvl) +")")
+             " (optimization level " + str(args.optimize_lvl) +")")
 
-pyplot.savefig(plots_dir+prog_name +"_"+str(optimize_lvl)+".png",
+pyplot.savefig(plots_dir+prog_name +"_"+str(args.optimize_lvl)+".png",
                bbox_inches=0)
