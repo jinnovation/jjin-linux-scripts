@@ -1,4 +1,11 @@
 #!/bin/bash
+PROGNAME=$(basename $0)
+if [ ! $(command -v openconnect) ]
+then
+    echo "${PROGNAME}  DEPENDENCIES:"
+    echo "* openconnect"
+    exit 1
+fi
 
 read -p "Username: " UNAME
 read -p "Password: " -s PW
